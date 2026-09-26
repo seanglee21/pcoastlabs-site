@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pro Hockey Manager</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+.feature { max-width: 980px; margin: 0 auto; padding: clamp(48px, 8vw, 96px) 0; }
+.feature h3 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  margin: 0 0 12px;
+  text-wrap: balance;
+}
+.feature p { color: var(--moss); max-width: 44em; margin: 0 auto 8px; }
+.feature .shots { margin-top: 36px; }
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 3vw, 36px);
+  margin: 36px auto 0;
+}
+@media (max-width: 700px) { .pair { grid-template-columns: 1fr; } }
+.pair img {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--hair);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.4);
+}
+.modes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 3vw, 36px);
+  max-width: 880px;
+  margin: 36px auto 0;
+  text-align: left;
+}
+@media (max-width: 700px) { .modes { grid-template-columns: 1fr; } }
+.mode {
+  background: var(--ink-2);
+  border: 1px solid var(--hair);
+  border-radius: 14px;
+  padding: 26px 28px;
+}
+.mode h4 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+.mode p { font-size: 0.95rem; color: var(--moss); margin: 0; }
+.mode .chip {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="logo" href="index.html">Pacific Coast Labs</a>
+  <span class="spacer"></span>
+  <a class="nav" href="phm.html" aria-current="page">The Game</a>
+  <a class="nav" href="writing.html">Blog</a>
+</header>
+
+<section class="game" style="padding-top: 150px;">
+  <div class="wide">
+    <p class="eyebrow" style="text-align: center;">A Pacific Coast Labs game</p>
+    <h2>Pro Hockey Manager</h2>
+    <p class="sub">Run a franchise from a desktop computer in 1995.
+    Under the pixels, the same math we publish papers about.</p>
+    <p class="ea">Early Access · October 2026
+    <span class="verify">Steam link when live</span></p>
+
+    <div class="feature">
+      <h3>The desk</h3>
+      <p>Your office is an operating system. GM Office, My Team,
+      Ledger, the Player Market, News, and the Archives each open
+      in their own window. There is an air hockey game hiding on
+      the desktop. Nobody will tell you where.</p>
+      <div class="pair">
+        <figure style="margin:0">
+          <img src="shots/gm_office.png" alt="The GM Office app on the retro desktop">
+        </figure>
+        <figure style="margin:0">
+          <img src="shots/desktop.png" alt="The retro desktop with the air hockey game open">
+        </figure>
+      </div>
+    </div>
+
+    <div class="feature">
+      <h3>The rink</h3>
+      <p>Live games play out event by event on a rink you can
+      read. The heatmap under the play is the distribution the
+      engine is actually sampling from, and your tactical calls
+      bend it while the game runs. Faceoffs land on the dots.
+      Wraparounds go in at the rate they really go in.</p>
+      <div class="shots">
+        <figure>
+          <img src="shots/live_game.png" alt="A live game with the possession-anchored rink heatmap">
+        </figure>
+      </div>
+    </div>
+
+    <div class="feature">
+      <h3>The league</h3>
+      <p>The Premier Hockey League: 32 clubs with histories,
+      awards, and a cup worth wanting. Every player identity is
+      measured from five seasons of real NHL play-by-play, then
+      lives its own life in your franchise. Roster and schedule
+      import packs are launch features, so the league can become
+      whoever you want it to be.</p>
+      <div class="pair">
+        <figure style="margin:0">
+          <img src="shots/player_card.png" alt="A player card with the full attribute set">
+        </figure>
+        <figure style="margin:0">
+          <img src="shots/my_team.png" alt="The My Team roster view">
+        </figure>
+      </div>
+    </div>
+
+    <div class="feature">
+      <h3>Two ways to play</h3>
+      <div class="modes">
+        <div class="mode">
+          <span class="chip">Default</span>
+          <h4>Realistic</h4>
+          <p>Calibrated fidelity. Teams play like their measured
+          identities. The numbers you see are the numbers the
+          engine believes.</p>
+        </div>
+        <div class="mode">
+          <span class="chip">One menu click away</span>
+          <h4>Gameplay</h4>
+          <p>Amplified character. Named tactics with real teeth,
+          coaching counters, and a league with the volume turned
+          up.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature" style="padding-bottom: 24px;">
+      <h3>The engine is the research</h3>
+      <p>The projection model inside the game is the same one we
+      race against every public hockey metric in the open. It gets
+      graded in April, in public, against a monkey. Read the
+      paper, or start with the plain version.</p>
+      <p style="margin-top: 18px;">
+      <a href="writing.html" style="color: var(--gold);">Matching the Monkey →</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Pacific Coast Labs LLC</span>
+  <a href="index.html">Home</a>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Matching the Monkey</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="logo" href="index.html">Pacific Coast Labs</a>
+  <span class="spacer"></span>
+  <a class="nav" href="phm.html">The Game</a>
+  <a class="nav" href="writing.html" aria-current="page">Blog</a>
+</header>
+
+<div class="article">
+<h1>Matching the Monkey</h1>
+<p class="lede">There are several public models for measuring NHL player value, each built differently. We ran a tournament to compare them: each metric predicted player performance for the following season, and each metric also judged everyone's predictions, our own included.</p>
+<p class="meta">Sean Lee · Pacific Coast Labs · September 2026</p>
+
+<div class="inbrief">
+<p class="label">In brief</p>
+<ul>
+<li>Five public metric families were evaluated against each
+other on identical players under one walk-forward protocol, each
+serving as both predictor and judge.</li>
+<li>A minimal projection built from each metric's own history out-predicts the raw metric on that metric's own scoreboard. The
+like-for-like comparison between metrics is therefore between
+their projections.</li>
+<li>Our projection shares the best overall score in the tournament. Our model records the single highest cell in
+the grid (+0.828, our projection against our own next-season
+values) and the largest self-persistence margin, and it is the only entrant whose ratings decompose into named events.</li>
+<li>Our 2026-27 projections freeze in a public commit on September 25 with the scoring rules pre-registered. The table will be rerun publicly in April 2027.</li>
+</ul>
+</div>
+
+<h2>The tournament</h2>
+<p>Anyone who uses public value metrics eventually has to choose one, but the models differ enough in how they are built that the choice is hard to make by inspection. Prediction offers a test:
+whatever a metric aims to capture, more of it should persist
+into next season than noise does. A tournament of predictions
+turns the choice into an empirical question, and we entered our
+own model alongside the rest.</p>
+<p>There are five model contestants: Evolving-Hockey's WAR, HockeyStats' WAR, MoneyPuck's game score, Hockey Alchemy's WAR, and our pWAR.
+Hockey Alchemy is the most recent addition, having published a validation of their own in August; they were
+added in September under the same protocol as everyone else.</p>
+<p>The tournament protocol: per-82 rates, 30-game minimums, walk-forward
+throughout (no prediction touches information from after the
+season it was made in), and strict common samples of 528 to 532
+skaters per transition, so that every number describes exactly
+the same players. Each metric predicts next season, and each
+metric also serves as a judge: how well did each entrant predict the next-season values?</p>
+
+<h2>The baseline</h2>
+<p>The tournament's baseline is Tom Tango's Marcel projection,
+named after the monkey from <em>Friends</em> because it is designed, in
+its author's words, to use "as little intelligence as possible":
+weight the player's last three seasons 5/4/3, regress toward the
+positional mean, adjust for age.</p>
+<p>The baseline's role can be easy to misread. A raw season of WAR is a measurement, not a forecast, and none of these metrics is published as one.
+But raw numbers are used as forecasts constantly, in trade
+arguments, contract debates, and preseason previews. So, rather than grade raw measurements on a job they were not built for,
+the tournament gives every metric the same minimal projection: a
+Marcel built from that metric's own history. Each entrant is projected in the identical way, and so the comparison becomes metric against metric on equal footing.</p>
+<p><strong>Why Marcel, and not something stronger?</strong>
+The baseline's job is to be neutral: standard published
+weights, no modeling opinions of its own, identical treatment for every entrant. Anything stronger would carry modeling choices of its own, and whoever made those choices would, in effect, be tuning the test. Marcel is the one projection nobody in the field built, which is what makes it fair to use on everybody.</p>
+
+<h2>Results</h2>
+<p>Three season transitions, 2022-23 through 2025-26. Mean
+Spearman rank correlation with next season. Each row is a predictor, and each column is a judge.</p>
+
+<div class="tablewrap"><table class="datatable">
+<thead><tr><th>predictor</th><th>ours</th><th>EH</th><th>HS</th><th>MP</th><th>HA</th><th>row mean</th></tr></thead>
+<tbody>
+<tr><td>ours</td><td>+0.795</td><td>+0.435</td><td>+0.533</td><td>+0.770</td><td>+0.719</td><td>+0.650</td></tr>
+<tr class="hl"><td>ours-marcel</td><td>+0.828</td><td>+0.445</td><td>+0.542</td><td>+0.796</td><td>+0.754</td><td>+0.673</td></tr>
+<tr><td>EH</td><td>+0.467</td><td>+0.410</td><td>+0.477</td><td>+0.511</td><td>+0.478</td><td>+0.469</td></tr>
+<tr><td>EH-marcel</td><td>+0.561</td><td>+0.478</td><td>+0.536</td><td>+0.602</td><td>+0.561</td><td>+0.548</td></tr>
+<tr><td>HS</td><td>+0.546</td><td>+0.427</td><td>+0.545</td><td>+0.583</td><td>+0.553</td><td>+0.531</td></tr>
+<tr><td>HS-marcel</td><td>+0.627</td><td>+0.480</td><td>+0.590</td><td>+0.661</td><td>+0.627</td><td>+0.597</td></tr>
+<tr><td>MP</td><td>+0.754</td><td>+0.464</td><td>+0.565</td><td>+0.810</td><td>+0.723</td><td>+0.663</td></tr>
+<tr><td>MP-marcel</td><td>+0.779</td><td>+0.461</td><td>+0.564</td><td>+0.820</td><td>+0.742</td><td>+0.673</td></tr>
+<tr><td>HA</td><td>+0.709</td><td>+0.430</td><td>+0.542</td><td>+0.740</td><td>+0.727</td><td>+0.630</td></tr>
+<tr><td>HA-marcel</td><td>+0.758</td><td>+0.444</td><td>+0.553</td><td>+0.771</td><td>+0.768</td><td>+0.659</td></tr>
+</tbody>
+</table></div>
+<p class="tablenote">ours = pWAR (this lab). EH = Evolving-Hockey WAR. HS = HockeyStats WAR. MP = MoneyPuck game score. HA = Hockey Alchemy WAR. Each -marcel row is the same Marcel recipe applied
+to that metric's own history.</p>
+
+<p>Three observations, all computable from the table.</p>
+<p><strong>The monkey result.</strong> On its own scoreboard,
+every raw metric is out-predicted by the Marcel built from its
+own history: Evolving-Hockey +0.410 against +0.478, HockeyStats
++0.545 against +0.590, MoneyPuck +0.810 against +0.820, Hockey
+Alchemy +0.727 against +0.768, and ours +0.795 against +0.828.
+A metric built to describe a season keeps variance that a forecast would smooth away. The tournament just puts a number on that tradeoff, for every metric under one protocol, ours included.</p>
+<p><strong>The top of the table.</strong> Our projection and
+MoneyPuck's Marcel share the best row mean at +0.673, with
+Hockey Alchemy's Marcel close behind at +0.659. On the other entrants' scoreboards alone, the same three sit within 0.005 of one another. The tournament code prints each
+transition separately for anyone who wants a finer grain.</p>
+<p><strong>Self-persistence.</strong> The single highest cell in the grid is our own values predicting themselves, at +0.828. Self-persistence alone does not prove much: a metric can agree with its own future by measuring something stable, whether or not that something is value. What matters is the pair. On the other entrants' scoreboards our projection sits with the best in the tournament, and on our own, no rival comes close. The margin between what our history predicts and what the best rival can reconstruct is +0.049, the largest in the field; the rest range from +0.025 down to -0.002. A model that predicts the field while holding signal the field cannot reconstruct is measuring something of its own.</p>
+
+<h2>Our entry</h2>
+<p>pWAR is a state-value model. It divides play into 150 game states from the puck-carrier's point of view, and play-by-play history sets each state's value: how strongly the next goal favors the side with the puck. Every event moves the game between states, and the change in value is credited to the players who caused it. A season of pWAR is the sum of a player's credited events, with shooting priced by expected goals, and the projection on top is the same Marcel recipe used for every entrant above.</p>
+<p>The property we consider the most important is attribution. Every
+pWAR rating decomposes into named events with stated values. Among the entrants at the top of the table, ours is the only one that can answer why a player rates where he does, event by event.</p>
+<p>A full account of the model will follow in a separate post.</p>
+
+<h2>The leak</h2>
+<p>pWAR was originally built as a general-purpose player valuation for
+our simulation engine, and for that purpose it was fit on all
+five seasons at once. The first time the tournament ran, one pooled component came along with the predictor. The results looked slightly too strong, which flagged an immediate check, and the classic look-ahead leak was there. After discovery, the predictor was rebuilt fully walk-forward.</p>
+<p>We include the episode because the lesson generalizes. From the outside, a tuned retrospective model and an
+honest one produce the same kind of table. We are confident the numbers above are clean, and the public code lets anyone rerun the table. But confidence is not a protocol. The only evaluation
+nobody can tune, ours included, is one graded on games that have
+not happened yet.</p>
+
+<h2>The freeze</h2>
+<p>Our 2026-27 projections freeze in <a href="https://github.com/seanglee21/matching-the-monkey/releases/tag/freeze-2026-27">a public, timestamped commit</a> before opening night on Friday, September 25, with the scoring rules pre-registered. In April 2027 the same code reruns the table on the season that actually happened, and the results will be published here whatever they say.</p>
+<p><a href="https://github.com/seanglee21/matching-the-monkey">The code and our per-season values</a> publish alongside the freeze. Entrants are bring-your-own-data: one command reproduces
+the table above, and any metric can join before the season starts. The full protocol ships with the code. We encourage you to rerun it, rather than take our word for it.</p>
+<p>This tournament exists because the field publishes: every
+entrant above made their work public enough to be tested, and
+that is the only reason a shared table is possible.</p>
+</div>
+
+<footer>
+  <span>© 2026 Pacific Coast Labs LLC</span>
+  <a href="index.html">Home</a>
+</footer>
+
+</body>
+</html>

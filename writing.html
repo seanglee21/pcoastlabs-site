@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Blog — Pacific Coast Labs</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+.posts { list-style: none; margin: 48px 0 0; padding: 0; }
+.posts li { border-top: 1px solid var(--hair); }
+.posts li:last-child { border-bottom: 1px solid var(--hair); }
+.posts a.post {
+  display: block;
+  padding: 26px 4px;
+  text-decoration: none;
+  transition: background 160ms;
+}
+.posts a.post:hover { background: rgba(233, 238, 235, 0.035); }
+.posts .date {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.posts h3 {
+  margin: 6px 0 6px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+.posts a.post:hover h3::after { content: " \2192"; color: var(--gold); }
+.posts .blurb { color: var(--moss); font-size: 0.95rem; margin: 0; }
+.upnext {
+  margin-top: 40px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--faint);
+  line-height: 1.9;
+}
+.upnext .k { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="logo" href="index.html">Pacific Coast Labs</a>
+  <span class="spacer"></span>
+  <a class="nav" href="phm.html">The Game</a>
+  <a class="nav" href="writing.html" aria-current="page">Blog</a>
+</header>
+
+<div class="article">
+<h1>Blog</h1>
+<p class="lede">Findings from the lab, in plain language.</p>
+
+<ul class="posts">
+  <li><a class="post" href="monkey.html">
+    <span class="date">September 2026</span>
+    <h3>Matching the Monkey</h3>
+    <p class="blurb">Our projection model, tested against the
+    public field under one protocol. Results now; grading in
+    April.</p>
+  </a></li>
+</ul>
+
+<div class="upnext">
+  <div><span class="k">sept 25</span> the 2026-27 projections freeze in a public commit</div>
+  <div><span class="k">october</span> Pro Hockey Manager enters Early Access</div>
+  <div><span class="k">april 2027</span> everyone gets graded, us included</div>
+</div>
+</div>
+
+<footer>
+  <span>© 2026 Pacific Coast Labs LLC</span>
+  <a href="index.html">Home</a>
+</footer>
+
+</body>
+</html>
